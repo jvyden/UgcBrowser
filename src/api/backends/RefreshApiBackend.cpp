@@ -20,7 +20,7 @@ public:
 
     ApiLevel* GetLevelById(const std::string& levelId) override {
         QUrl* url = this->GetApiBaseUrl(QStringLiteral("levels/id/").append(levelId));
-        QJsonObject data = this->apiClient->getJson(url);
+        QJsonObject data = *this->apiClient->getJson(url);
         
         return new ApiLevel {
             .levelId = data["levelId"].toString(),

@@ -28,6 +28,7 @@ void MainWindow::InitializeBackend(ApiBackend *backend) {
     this->ui->apiList->addItem(label);
 
     this->ui->levelList->addItem(backend->GetLevelById("1")->title);
+//    this->ui->levelList->addItem(backend->GetLevelById("2")->title);
     this->ui->levelList->addItem(backend->GetLevelById("3")->title);
     this->ui->levelList->addItem(backend->GetLevelById("4")->title);
 }
