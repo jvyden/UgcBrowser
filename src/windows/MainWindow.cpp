@@ -21,7 +21,9 @@ void MainWindow::InitializeBackend(ApiBackend *backend) {
     QString label = backend->GetPrettyName()
             .append(" @ ")
             .append(backend->GetApiBaseUrl()->toString());
-    this->ui->listWidget->addItem(label);
+    this->ui->apiList->addItem(label);
 
-    this->ui->listWidget_2->addItem(QString::fromStdString(backend->GetLevelById("1")->title));
+    this->ui->levelList->addItem(QString::fromStdString(backend->GetLevelById("1")->title));
+    this->ui->levelList->addItem(QString::fromStdString(backend->GetLevelById("2")->title));
+    this->ui->levelList->addItem(QString::fromStdString(backend->GetLevelById("3")->title));
 }

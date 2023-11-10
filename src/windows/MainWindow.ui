@@ -21,10 +21,24 @@
     <item row="0" column="0">
      <layout class="QHBoxLayout" name="mainSeparator">
       <item>
-       <widget class="QListWidget" name="listWidget"/>
+       <widget class="QListWidget" name="apiList">
+        <property name="maximumSize">
+         <size>
+          <width>256</width>
+          <height>16777215</height>
+         </size>
+        </property>
+       </widget>
       </item>
       <item>
-       <widget class="QListWidget" name="listWidget_2"/>
+       <widget class="Line" name="line">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QListWidget" name="levelList"/>
       </item>
      </layout>
     </item>
