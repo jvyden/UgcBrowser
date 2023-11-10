@@ -2,7 +2,7 @@
 #define UGCBROWSER_MAINWINDOW_H
 
 #include <QMainWindow>
-#include "../backends/ApiBackend.h"
+#include "../api/backends/ApiBackend.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

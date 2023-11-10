@@ -1,7 +1,7 @@
 #include <iostream>
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
-#include "../backends/RefreshApiBackend.h"
+#include "../api/backends/RefreshApiBackend.h"
 
 MainWindow::MainWindow(QWidget *parent) :
         QMainWindow(parent), ui(new Ui::MainWindow) {
