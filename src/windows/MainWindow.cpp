@@ -12,7 +12,14 @@ MainWindow::~MainWindow() {
     delete ui;
 }
 
-void MainWindow::initialize() {
+void MainWindow::Initialize() {
     auto* backend = new RefreshApiBackend;
-    this->ui->listWidget->addItem(backend->GetBackendName());
+    this->InitializeBackend(backend);
+}
+
+void MainWindow::InitializeBackend(ApiBackend *backend) {
+    QString label = backend->GetPrettyName()
+            .append(" @ ")
+            .append(backend->GetApiBaseUrl()->toString());
+    this->ui->listWidget->addItem(label);
 }

@@ -3,12 +3,16 @@
 
 #include "ApiBackend.h"
 
-class RefreshApiBackend : ApiBackend {
+class RefreshApiBackend : public ApiBackend {
     ~RefreshApiBackend() override = default;
 
 public:
-    QString GetBackendName() override {
+    QString GetPrettyName() override {
         return "Refresh";
+    }
+    
+    QUrl* GetApiBaseUrl() override {
+        return new QUrl("https://lbp.littlebigrefresh.com/api/v3/");
     }
 };
 
