@@ -7,7 +7,9 @@ qt_add_executable(UgcBrowser main.cpp
         api/backends/RefreshApiBackend.h
         api/backends/RefreshApiBackend.h
         api/types/ApiLevel.h
-        api/backends/RefreshApiBackend.h)
+        api/backends/RefreshApiBackend.h
+        api/ApiClient.cpp
+        api/ApiClient.h)
 
 set_target_properties(UgcBrowser PROPERTIES
     WIN32_EXECUTABLE ON

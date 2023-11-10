@@ -10,6 +10,7 @@
 #include <QNetworkAccessManager>
 #include "../types/ApiLevel.h"
 #include "ApiBackend.h"
+#include "../ApiClient.h"
 
 class RefreshApiBackend : public ApiBackend {
     ~RefreshApiBackend() override = default;
@@ -21,10 +22,10 @@ class RefreshApiBackend : public ApiBackend {
     ApiLevel* GetLevelById(const std::string& levelId) override;
 
 private:
-    QNetworkAccessManager* networkManager;
+    ApiClient* apiClient;
     
 public:
-    explicit RefreshApiBackend(QObject* parent) : networkManager(new QNetworkAccessManager(parent))
+    explicit RefreshApiBackend(QObject* parent) : apiClient(new ApiClient(parent))
     {}
 };
 

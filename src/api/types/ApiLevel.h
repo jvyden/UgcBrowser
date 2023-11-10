@@ -5,9 +5,9 @@
 
 struct ApiLevel {
 public:
-    std::string levelId;
-    std::string title;
-    std::string description;
+    QString levelId;
+    QString title;
+    QString description;
     long publishDate;
 };
 
