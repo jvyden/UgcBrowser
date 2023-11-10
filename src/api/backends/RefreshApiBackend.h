@@ -7,6 +7,7 @@
 
 #include <QString>
 #include <QUrl>
+#include <QNetworkAccessManager>
 #include "../types/ApiLevel.h"
 #include "ApiBackend.h"
 
@@ -18,6 +19,13 @@ class RefreshApiBackend : public ApiBackend {
     QUrl* GetApiBaseUrl(QString endpoint) override;
     
     ApiLevel* GetLevelById(const std::string& levelId) override;
+
+private:
+    QNetworkAccessManager* networkManager;
+    
+public:
+    explicit RefreshApiBackend(QObject* parent) : networkManager(new QNetworkAccessManager(parent))
+    {}
 };
 
 #endif //UGCBROWSER_REFRESHAPIBACKEND_H

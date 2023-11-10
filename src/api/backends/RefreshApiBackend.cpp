@@ -2,11 +2,12 @@
 #include <QtNetwork>
 
 class RefreshApiBackend : public ApiBackend {
-    ~RefreshApiBackend() override = default;
 private:
-//    QNetworkAccessManager* networkAccessManager = new QNetworkAccessManager;
-
+    QNetworkAccessManager* networkManager;
+    
 public:
+    ~RefreshApiBackend() override = default;
+    
     QString GetPrettyName() override;
     QUrl* GetApiBaseUrl(QString endpoint) override {
         return new QUrl(QStringLiteral("https://lbp.littlebigrefresh.com/api/v3/").append(endpoint));
@@ -18,24 +19,23 @@ public:
 
     ApiLevel* GetLevelById(const std::string& levelId) {
         QUrl* url = this->GetApiBaseUrl("levels/id/1");
-        std::cout << "URL: " << url->toString().toStdString() << std::endl;
         QNetworkRequest request(*url);
-        QNetworkAccessManager manager;
-        QNetworkReply* reply = manager.get(request);
+        QNetworkReply* reply = this->networkManager->get(request);
 
         while (!reply->isFinished())
         {
             qApp->processEvents();
         }
 
-        QByteArray response_data = reply->readAll();
-        QJsonDocument json = QJsonDocument::fromJson(response_data);
+        QByteArray responseData = reply->readAll();
+        QJsonDocument jsonDocument = QJsonDocument::fromJson(responseData);
+        QJsonObject jsonObject = jsonDocument.object();
         reply->deleteLater();
         
         return new ApiLevel {
             .levelId = "1",
-            .title = std::to_string(json.object().count()),
-            .description = "description",
+            .title = jsonObject["data"].toObject()["title"].toString().toStdString(),
+            .description = "asdf",
             .publishDate = 0,
         };
     }

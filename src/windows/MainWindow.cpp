@@ -17,7 +17,7 @@ void MainWindow::showEvent(QShowEvent *event) {
 }
 
 void MainWindow::Initialize() {
-    auto* backend = new RefreshApiBackend;
+    auto* backend = new RefreshApiBackend(this);
     this->InitializeBackend(backend);
 }
 
