@@ -1,6 +1,6 @@
 #include <iostream>
 #include "QApplication"
-#include "windows/mainwindow.h"
+#include "windows/MainWindow.h"
 
 int main(int argc, char *argv[]) {
     // I told you. It's literally a hello world right now.
@@ -8,8 +8,8 @@ int main(int argc, char *argv[]) {
     std::cout << "Hello, World!" << std::endl;
     
     QApplication application(argc, argv);
-    mainwindow mainwindow;
-    mainwindow.show();
+    MainWindow mainWindow;
+    mainWindow.show();
     
     return application.exec();
 }
