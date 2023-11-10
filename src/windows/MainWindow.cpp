@@ -22,4 +22,6 @@ void MainWindow::InitializeBackend(ApiBackend *backend) {
             .append(" @ ")
             .append(backend->GetApiBaseUrl()->toString());
     this->ui->listWidget->addItem(label);
+
+    this->ui->listWidget_2->addItem(QString::fromStdString(backend->GetLevelById("1")->title));
 }

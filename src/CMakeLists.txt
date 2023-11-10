@@ -5,6 +5,8 @@ qt_add_executable(UgcBrowser main.cpp
         api/backends/ApiBackend.h
         api/backends/RefreshApiBackend.cpp
         api/backends/RefreshApiBackend.h
+        api/backends/RefreshApiBackend.h
+        api/types/ApiLevel.h
         api/backends/RefreshApiBackend.h)
 target_link_libraries(UgcBrowser PRIVATE Qt6::Core Qt6::Widgets)
 

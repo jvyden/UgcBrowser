@@ -4,11 +4,15 @@
 #include <QString>
 #include <iostream>
 #include <QUrl>
+#include "../types/ApiLevel.h"
 
 struct ApiBackend {
+    virtual ~ApiBackend() = default;
+    
     virtual QString GetPrettyName() = 0;
     virtual QUrl* GetApiBaseUrl() = 0;
-    virtual ~ApiBackend() = default;
+
+    virtual ApiLevel* GetLevelById(const std::string& levelId) = 0;
 };
 
 #endif //UGCBROWSER_APIBACKEND_H
