@@ -12,7 +12,7 @@ Q_OBJECT
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
-
+    void initialize();
     ~MainWindow() override;
 
 private:
