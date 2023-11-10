@@ -15,6 +15,7 @@ class RefreshApiBackend : public ApiBackend {
     
     QString GetPrettyName() override;
     QUrl* GetApiBaseUrl() override;
+    QUrl* GetApiBaseUrl(QString endpoint) override;
     
     ApiLevel* GetLevelById(const std::string& levelId) override;
 };

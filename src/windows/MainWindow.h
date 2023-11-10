@@ -20,6 +20,8 @@ private:
     Ui::MainWindow *ui;
     
     void InitializeBackend(ApiBackend* backend);
+
+    void showEvent(QShowEvent *event);
 };
 
 

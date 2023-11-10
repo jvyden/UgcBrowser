@@ -11,6 +11,7 @@ struct ApiBackend {
     
     virtual QString GetPrettyName() = 0;
     virtual QUrl* GetApiBaseUrl() = 0;
+    virtual QUrl* GetApiBaseUrl(QString endpoint) = 0;
 
     virtual ApiLevel* GetLevelById(const std::string& levelId) = 0;
 };

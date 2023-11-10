@@ -1,12 +1,10 @@
 #include "QApplication"
 #include "windows/MainWindow.h"
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
     QApplication application(argc, argv);
     MainWindow mainWindow;
     mainWindow.show();
-
-    mainWindow.Initialize();
 
     return QApplication::exec();
 }

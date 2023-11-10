@@ -2,14 +2,18 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 #include "../api/backends/RefreshApiBackend.h"
+#include <QTimer>
 
-MainWindow::MainWindow(QWidget *parent) :
-        QMainWindow(parent), ui(new Ui::MainWindow) {
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
 }
 
 MainWindow::~MainWindow() {
     delete ui;
+}
+
+void MainWindow::showEvent(QShowEvent *event) {
+    this->Initialize();
 }
 
 void MainWindow::Initialize() {
@@ -24,6 +28,6 @@ void MainWindow::InitializeBackend(ApiBackend *backend) {
     this->ui->apiList->addItem(label);
 
     this->ui->levelList->addItem(QString::fromStdString(backend->GetLevelById("1")->title));
-    this->ui->levelList->addItem(QString::fromStdString(backend->GetLevelById("2")->title));
-    this->ui->levelList->addItem(QString::fromStdString(backend->GetLevelById("3")->title));
+//    this->ui->levelList->addItem(QString::fromStdString(backend->GetLevelById("2")->title));
+//    this->ui->levelList->addItem(QString::fromStdString(backend->GetLevelById("3")->title));
 }
