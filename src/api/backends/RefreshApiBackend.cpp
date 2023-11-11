@@ -19,5 +19,10 @@ ApiLevel RefreshApiBackend::GetLevelById(const std::string &levelId) {
     QUrl* url = this->GetApiBaseUrl(QStringLiteral("levels/id/").append(levelId));
     QJsonObject data = *this->apiClient->getJson(url);
 
-    return ApiLevel::fromJson(data);
+    return ApiLevel {
+        .levelId = data["levelId"].toString(),
+        .title = data["title"].toString(),
+        .description = data["description"].toString(),
+        .publishDate = 0,
+    };
 }
