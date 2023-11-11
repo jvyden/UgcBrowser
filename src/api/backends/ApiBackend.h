@@ -15,6 +15,7 @@ public:
     virtual QUrl* GetApiBaseUrl(QString endpoint) = 0;
 
     virtual ApiLevel GetLevelById(const std::string& levelId) = 0;
+    virtual uint GetRecentLevels(uint skip, std::vector<ApiLevel>* levels) = 0;
 };
 
 #endif //UGCBROWSER_APIBACKEND_H

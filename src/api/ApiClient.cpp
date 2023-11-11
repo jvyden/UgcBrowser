@@ -6,7 +6,7 @@
 #include <QtNetwork>
 #include "ApiClient.h"
 
-QJsonObject* ApiClient::getJson(QUrl *url) {
+QJsonObject ApiClient::getJson(QUrl *url) {
     QNetworkRequest request(*url);
     QNetworkReply* reply = this->networkManager->get(request);
 
@@ -21,11 +21,5 @@ QJsonObject* ApiClient::getJson(QUrl *url) {
     QJsonDocument jsonDocument = QJsonDocument::fromJson(responseData);
     QJsonObject jsonObject = jsonDocument.object();
     
-    bool success = jsonObject["success"].toBool(false);
-    if(!success) {
-        return nullptr;
-    }
-    
-    QJsonObject dataObject = jsonObject["data"].toObject();
-    return new QJsonObject(dataObject);
+    return jsonObject;
 }

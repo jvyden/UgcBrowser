@@ -16,6 +16,9 @@ class RefreshApiBackend : public ApiBackend {
 private:
     ApiClient* apiClient;
     
+    QJsonObject* getJson(QUrl* url);
+    QJsonArray* getJsonList(QUrl* url);
+    
 public:
     explicit RefreshApiBackend(QObject* parent) : apiClient(new ApiClient(parent)) {}
     ~RefreshApiBackend() override = default;
@@ -25,6 +28,7 @@ public:
     QUrl* GetApiBaseUrl(QString endpoint) override;
 
     ApiLevel GetLevelById(const std::string& levelId) override;
+    uint GetRecentLevels(uint skip, std::vector<ApiLevel>* levels) override;
 };
 
 #endif //UGCBROWSER_REFRESHAPIBACKEND_H

@@ -29,10 +29,10 @@ void MainWindow::InitializeBackend(ApiBackend *backend) {
             .append(backend->GetApiBaseUrl()->toString());
     this->ui->apiList->addItem(label);
 
-//    this->ui->levelList->addItem(backend->GetLevelById("1").title);
-//    this->ui->levelList->addItem(backend->GetLevelById("2")->title);
-//    this->ui->levelList->addItem(backend->GetLevelById("3").title);
-//    this->ui->levelList->addItem(backend->GetLevelById("4").title);
-
-    this->ui->levelList->addItem(backend->GetLevelById("7nLePcCJ").title);
+    std::vector<ApiLevel> levels(10);
+    backend->GetRecentLevels(0, &levels);
+    
+    for (const ApiLevel &item: levels) {
+        this->ui->levelList->addItem(item.title);
+    }
 }

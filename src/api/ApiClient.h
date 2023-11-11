@@ -16,7 +16,7 @@ public:
     explicit ApiClient(QObject* parent) : networkManager(new QNetworkAccessManager(parent))
     {}
     
-    QJsonObject* getJson(QUrl* url);
+    QJsonObject getJson(QUrl* url);
 };
 
 

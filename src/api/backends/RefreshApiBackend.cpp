@@ -1,7 +1,29 @@
-#include "ApiBackend.h"
-#include "../ApiClient.h"
 #include <QtNetwork>
 #include "RefreshApiBackend.h"
+
+QJsonObject* RefreshApiBackend::getJson(QUrl *url) {
+    QJsonObject jsonObject = this->apiClient->getJson(url);
+
+    bool success = jsonObject["success"].toBool(false);
+    if(!success) {
+        return nullptr;
+    }
+
+    QJsonObject dataObject = jsonObject["data"].toObject();
+    return new QJsonObject(dataObject);
+}
+
+QJsonArray* RefreshApiBackend::getJsonList(QUrl *url) {
+    QJsonObject jsonObject = this->apiClient->getJson(url);
+
+    bool success = jsonObject["success"].toBool(false);
+    if(!success) {
+        return nullptr;
+    }
+
+    QJsonArray dataObject = jsonObject["data"].toArray();
+    return new QJsonArray(dataObject);
+}
 
 QUrl *RefreshApiBackend::GetApiBaseUrl() {
     return new QUrl(QStringLiteral("https://lbp.littlebigrefresh.com/api/v3/"));
@@ -17,7 +39,7 @@ QString RefreshApiBackend::GetPrettyName() {
 
 ApiLevel RefreshApiBackend::GetLevelById(const std::string &levelId) {
     QUrl* url = this->GetApiBaseUrl(QStringLiteral("levels/id/").append(levelId));
-    QJsonObject data = *this->apiClient->getJson(url);
+    QJsonObject data = *this->getJson(url);
 
     return ApiLevel {
         .levelId = data["levelId"].toString(),
@@ -25,4 +47,8 @@ ApiLevel RefreshApiBackend::GetLevelById(const std::string &levelId) {
         .description = data["description"].toString(),
         .publishDate = 0,
     };
+}
+
+uint RefreshApiBackend::GetRecentLevels(uint skip, std::vector<ApiLevel>* levels) {
+    return 0;
 }
