@@ -13,20 +13,18 @@
 #include "../ApiClient.h"
 
 class RefreshApiBackend : public ApiBackend {
+private:
+    ApiClient* apiClient;
+    
+public:
+    explicit RefreshApiBackend(QObject* parent) : apiClient(new ApiClient(parent)) {}
     ~RefreshApiBackend() override = default;
     
     QString GetPrettyName() override;
     QUrl* GetApiBaseUrl() override;
     QUrl* GetApiBaseUrl(QString endpoint) override;
-    
-    ApiLevel* GetLevelById(const std::string& levelId) override;
 
-private:
-    ApiClient* apiClient;
-    
-public:
-    explicit RefreshApiBackend(QObject* parent) : apiClient(new ApiClient(parent))
-    {}
+    ApiLevel GetLevelById(const std::string& levelId) override;
 };
 
 #endif //UGCBROWSER_REFRESHAPIBACKEND_H

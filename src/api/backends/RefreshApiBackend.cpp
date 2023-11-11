@@ -1,36 +1,23 @@
 #include "ApiBackend.h"
 #include "../ApiClient.h"
 #include <QtNetwork>
+#include "RefreshApiBackend.h"
 
-class RefreshApiBackend : public ApiBackend {
-private:
-    ApiClient* apiClient;
-    
-public:
-    ~RefreshApiBackend() override = default;
-    
-    QString GetPrettyName() override;
-    QUrl* GetApiBaseUrl(QString endpoint) override {
-        return new QUrl(QStringLiteral("https://lbp.littlebigrefresh.com/api/v3/").append(endpoint));
-    }
-    
-    QUrl* GetApiBaseUrl() override {
-        return new QUrl(QStringLiteral("https://lbp.littlebigrefresh.com/api/v3/"));
-    }
+QUrl *RefreshApiBackend::GetApiBaseUrl() {
+    return new QUrl(QStringLiteral("https://lbp.littlebigrefresh.com/api/v3/"));
+}
 
-    ApiLevel* GetLevelById(const std::string& levelId) override {
-        QUrl* url = this->GetApiBaseUrl(QStringLiteral("levels/id/").append(levelId));
-        QJsonObject data = *this->apiClient->getJson(url);
-        
-        return new ApiLevel {
-            .levelId = data["levelId"].toString(),
-            .title = data["title"].toString(),
-            .description = data["description"].toString(),
-            .publishDate = 0,
-        };
-    }
-};
+QUrl *RefreshApiBackend::GetApiBaseUrl(QString endpoint) {
+    return new QUrl(QStringLiteral("https://lbp.littlebigrefresh.com/api/v3/").append(endpoint));
+}
 
 QString RefreshApiBackend::GetPrettyName() {
-    return "Refresh";
+    return QStringLiteral("Refresh");
+}
+
+ApiLevel RefreshApiBackend::GetLevelById(const std::string &levelId) {
+    QUrl* url = this->GetApiBaseUrl(QStringLiteral("levels/id/").append(levelId));
+    QJsonObject data = *this->apiClient->getJson(url);
+
+    return ApiLevel::fromJson(data);
 }
