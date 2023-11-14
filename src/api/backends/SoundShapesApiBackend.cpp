@@ -61,14 +61,20 @@ ApiLevel SoundShapesApiBackend::GetLevelById(const std::string &levelId) {
 
 uint SoundShapesApiBackend::GetRecentLevels(const uint skip, std::vector<ApiLevel>* levels) {
     QUrl* url = this->GetApiBaseUrl(QStringLiteral("levels"));
-    QUrlQuery query(QStringLiteral("skip=").append(std::to_string(skip)));
+    
+    QString skipQuery = QStringLiteral("skip=").append(std::to_string(skip));
+    QString countQuery = QStringLiteral("&count=").append(std::to_string(levels->capacity()));
+    
+    QUrlQuery query(skipQuery.append(countQuery));
     
     url->setQuery(query);
     
     QJsonArray data = *this->getJsonList(url);
-    for (int i = 0; i < levels->size(); i++) {
-        (*levels)[i] = levelFromJson(data[i].toObject());
-        std::cout << (*levels)[i].title.toStdString() << std::endl;
+    for (int i = 0; i < data.size(); i++) {
+        ApiLevel level = levelFromJson(data[i].toObject());
+        std::cout << i << ": " << level.title.toStdString() << std::endl;
+
+        (*levels)[i] = level;
     }
     
     return 0;
