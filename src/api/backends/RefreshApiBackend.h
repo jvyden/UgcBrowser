@@ -31,4 +31,6 @@ public:
     void GetRecentLevels(uint skip, std::vector<ApiLevel>* levels) override;
 };
 
+ApiLevel levelFromRefreshJson(QJsonObject data);
+
 #endif //UGCBROWSER_REFRESHAPIBACKEND_H

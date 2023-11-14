@@ -28,5 +28,6 @@ public:
     void GetRecentLevels(uint skip, std::vector<ApiLevel>* levels) override;
 };
 
+ApiLevel levelFromSoundShapesJson(QJsonObject data);
 
 #endif //UGCBROWSER_SOUNDSHAPESAPIBACKEND_H

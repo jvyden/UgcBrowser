@@ -18,8 +18,8 @@ void MainWindow::showEvent(QShowEvent *event) {
 }
 
 void MainWindow::Initialize() {
-//    RefreshApiBackend backend(this);
-    SoundShapesApiBackend backend(this);
+    RefreshApiBackend backend(this);
+//    SoundShapesApiBackend backend(this);
     this->InitializeBackend(&backend);
 }
 

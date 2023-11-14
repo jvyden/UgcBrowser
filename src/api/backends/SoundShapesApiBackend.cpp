@@ -18,7 +18,6 @@ QJsonObject* SoundShapesApiBackend::getJson(QUrl *url) {
 }
 
 QJsonArray* SoundShapesApiBackend::getJsonList(QUrl *url) {
-    std::cout << "URL: " << url->toString().toStdString() << std::endl;
     QJsonObject jsonObject = this->apiClient->getJson(url);
 
     bool success = jsonObject["success"].toBool(false);
@@ -43,7 +42,7 @@ QUrl *SoundShapesApiBackend::GetApiBaseUrl(QString endpoint) {
     return new QUrl(QStringLiteral("https://sound.ture.fish/api/v1/").append(endpoint));
 }
 
-ApiLevel levelFromJson(QJsonObject data) {
+ApiLevel levelFromSoundShapesJson(QJsonObject data) {
     return ApiLevel {
             .levelId = data["id"].toString(),
             .title = data["name"].toString(),
@@ -56,7 +55,7 @@ ApiLevel SoundShapesApiBackend::GetLevelById(const std::string &levelId) {
     QUrl* url = this->GetApiBaseUrl(QStringLiteral("levels/id/").append(levelId));
     QJsonObject data = *this->getJson(url);
     
-    return levelFromJson(data);
+    return levelFromSoundShapesJson(data);
 }
 
 void SoundShapesApiBackend::GetRecentLevels(uint skip, std::vector<ApiLevel>* levels) {
@@ -71,9 +70,7 @@ void SoundShapesApiBackend::GetRecentLevels(uint skip, std::vector<ApiLevel>* le
     
     QJsonArray data = *this->getJsonList(url);
     for (int i = 0; i < data.size(); i++) {
-        ApiLevel level = levelFromJson(data[i].toObject());
-        std::cout << i << ": " << level.title.toStdString() << std::endl;
-
+        ApiLevel level = levelFromSoundShapesJson(data[i].toObject());
         (*levels)[i] = level;
     }
 }
