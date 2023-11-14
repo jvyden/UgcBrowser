@@ -49,6 +49,5 @@ ApiLevel RefreshApiBackend::GetLevelById(const std::string &levelId) {
     };
 }
 
-uint RefreshApiBackend::GetRecentLevels(uint skip, std::vector<ApiLevel>* levels) {
-    return 0;
+void RefreshApiBackend::GetRecentLevels(uint skip, std::vector<ApiLevel>* levels) {
 }

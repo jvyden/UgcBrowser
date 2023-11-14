@@ -25,7 +25,7 @@ public:
     QUrl* GetApiBaseUrl(QString endpoint) override;
 
     ApiLevel GetLevelById(const std::string& levelId) override;
-    uint GetRecentLevels(uint skip, std::vector<ApiLevel>* levels) override;
+    void GetRecentLevels(uint skip, std::vector<ApiLevel>* levels) override;
 };
 
 

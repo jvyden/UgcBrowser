@@ -59,7 +59,7 @@ ApiLevel SoundShapesApiBackend::GetLevelById(const std::string &levelId) {
     return levelFromJson(data);
 }
 
-uint SoundShapesApiBackend::GetRecentLevels(const uint skip, std::vector<ApiLevel>* levels) {
+void SoundShapesApiBackend::GetRecentLevels(uint skip, std::vector<ApiLevel>* levels) {
     QUrl* url = this->GetApiBaseUrl(QStringLiteral("levels"));
     
     QString skipQuery = QStringLiteral("skip=").append(std::to_string(skip));
@@ -76,8 +76,6 @@ uint SoundShapesApiBackend::GetRecentLevels(const uint skip, std::vector<ApiLeve
 
         (*levels)[i] = level;
     }
-    
-    return 0;
 }
 
 
